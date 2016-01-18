@@ -382,6 +382,23 @@ public class MainActivity extends AppCompatActivity implements ActionMenuView.On
 
 
 
+    //接收google 语音结果
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    mSearchView.setActivated(true);
+                    mSearchView.setText(result.get(0));
+                }
+                break;
+            }
+        }
+    }
 
 
 
